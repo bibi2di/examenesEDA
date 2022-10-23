@@ -43,7 +43,7 @@ public class SimpleLinkedList<T> {
         else{
             Node aBorrar = buscar(elem);
             if (aBorrar == null){}
-            else if (first.next == null)
+            else if (aBorrar== first && first.next == null)
                 first = null;
             else{
                 Node actual = first;
