@@ -22,6 +22,19 @@ public class DoubleCircularLinkedList {// Estekadura bikoitzeko zerrenda zirkula
     public void añadirAlFinal(String s ){
         DoubleNode nuevo = new DoubleNode(s);
 
+        if (first == null)
+        {
+            first = nuevo;
+            first.next = nuevo;
+            first.prev = nuevo;
+
+        }
+        else {
+            first.prev.next = nuevo;
+            nuevo.prev = first.prev;
+            nuevo.next = first;
+            first.prev = nuevo;
+        }
 
 
 
@@ -30,10 +43,10 @@ public class DoubleCircularLinkedList {// Estekadura bikoitzeko zerrenda zirkula
 
     private void copiarRestantes(String[] s, int i){
         // copiar los valores del array s desde la posición i
-
-
-
-
+        while (i < s.length){
+            añadirAlFinal(s[i]);
+            i++;
+        }
     }
 
 
@@ -43,12 +56,25 @@ public class DoubleCircularLinkedList {// Estekadura bikoitzeko zerrenda zirkula
         this.first = null;
         int i1 = 0;
         int i2 = 0;
-
-
-
-
-
-
+        if (s1 == null && s2 == null){}
+        else if(s1 == null){copiarRestantes(s2,i2);}
+        else if (s2 == null){copiarRestantes(s1,i1);}
+        else{
+            while (i1 < s1.length && i2 < s2.length){
+                if (s1[i1].compareTo(s2[i2]) < 0){
+                    añadirAlFinal(s1[i1]);
+                    i1++;
+                }
+                else{
+                    añadirAlFinal(s2[i2]);
+                    i2++;
+                }
+            }
+            if (i1 < s1.length)
+                copiarRestantes(s1, i1);
+            else if (i2 < s2.length)
+                copiarRestantes(s2,i2);
+        }
 
     }
 
